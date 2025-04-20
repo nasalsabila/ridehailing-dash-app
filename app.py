@@ -260,7 +260,7 @@ with tabs[1]:
 
     col1, col2 = st.columns(2)
 
-# === Plot 1: Usage Segment (ukuran compact) ===
+
     with col1:
         usage_segment_counts = user_summary['usage_based_segment'].value_counts()
         most_frequent_segment = usage_segment_counts.index[0]
@@ -386,14 +386,14 @@ with tabs[3]:
     
     st.subheader("Input Features")
     
-    # Input fields
+    
     fare = st.number_input('Fare (in currency)', min_value=0.0, value=20.0, step=0.1)
     distance_km = st.number_input('Distance (in km)', min_value=0.0, value=10.0, step=0.1)
     ride_duration_min = st.number_input('Ride Duration (in minutes)', min_value=1.0, value=15.0, step=1.0)
     hour = st.number_input('Hour of the Ride (0-23)', min_value=0, max_value=23, value=14)
     request_day = st.selectbox('Day of the week', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
 
-    # Encoding the day
+   
     request_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].index(request_day)
 
     fare_per_km = fare / distance_km if distance_km > 0 else 0.0
@@ -403,11 +403,11 @@ with tabs[3]:
     pickup_location = st.selectbox('Pickup Location', ['Location A', 'Location B', 'Location C', 'Location D'])
     dropoff_location = st.selectbox('Dropoff Location', ['Location A', 'Location B', 'Location C', 'Location D'])
 
-    # Encode pickup and dropoff locations
+    
     pickup_enc = le_pickup.fit_transform(['Location A', 'Location B', 'Location C', 'Location D'])[0]  # Simulating the encoding
     dropoff_enc = le_dropoff.fit_transform(['Location A', 'Location B', 'Location C', 'Location D'])[0]
 
-    # Prepare the input data for prediction
+    
     input_data = pd.DataFrame({
         'fare': [fare],
         'distance_km': [distance_km],
@@ -429,10 +429,10 @@ with tabs[3]:
     else:
         st.markdown("### Prediction: The ride **will not be canceled**.")
 
-    # Plot feature importance
+    
     st.subheader("Model Feature Importance")
 
-    # Assuming feature importance is available from the model
+  
     importances = model.feature_importances_
     features = ['fare', 'distance_km', 'ride_duration_min', 'hour', 'request_day', 'fare_per_km', 'user_prev_cancel', 'pickup_enc', 'dropoff_enc']
 
